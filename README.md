@@ -1,7 +1,7 @@
 # Iris Linear Regression with Gradient Descent (C++ and Python)
 This project implements a simple linear regression model using gradient descent from scratch using C++, applied to the Iris dataset across all 3 plant species.
 The regression line is visualised in Python using matplotlib. 
-
+![Image](https://github.com/user-attachments/assets/1ceafd04-87da-4cbe-b539-0291dd17f978)
 ## What I did
 - C++ implementation of gradient descent.
 - Use 1 feature (sepal length) to predict another (petal length).
