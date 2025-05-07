@@ -4,7 +4,7 @@ The regression line is visualised in Python using matplotlib.
 
 ## What I did
 - C++ implementation of gradient descent.
-- Use 1 feature (sepal length) to predict another (petal length)
+- Use 1 feature (sepal length) to predict another (petal length).
 - Visualise predictions.
 
 ## What I learned
