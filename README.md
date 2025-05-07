@@ -20,3 +20,4 @@ The regression line is visualised in Python using matplotlib.
 - Iris Dataset: A dataset containing the sepal/petal length & width for 3 plant species.
 - I used on 2 numerical columns in the project, the sepal length and the petal length.
 - Source: https://archive.ics.uci.edu/
+The dataset is included in /data/iris.csv for convenience.
