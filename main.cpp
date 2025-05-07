@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include <cmath>
+#include <tuple>
 
 struct Data {
 	int id;
@@ -32,6 +33,28 @@ std::istream& operator>>(std::istream& input, Data& df)
 	return input;
 }
 
+
+
+// Gradient descent function
+std::tuple<float,float> gradient_descent(std::vector<Data>& df, float m, float b, double L) {
+	float m_gradient{0};
+	float b_gradient{0};
+
+	for (unsigned i = 0; i < df.size(); i++) {
+		float x = df[i].sepalLength;
+		float y = df[i].petalLength;
+
+		m_gradient += x * (y - (m * x + b));
+		b_gradient +=  (y - (m * x + b));
+	
+	}
+	
+	float new_m = m - ((-2.0f) / df.size()) * m_gradient * L;
+	float new_b = b - ((-2.0f) / df.size()) * b_gradient * L;
+	return { new_m, new_b };
+}
+
+
 int main() {
 	
 	std::ifstream f("Data/Iris.csv");
@@ -51,15 +74,29 @@ int main() {
 		f.close();
 	}
 
-	// Output the data stored in dataFrame 
-	for (unsigned i = 0; i < dataFrame.size(); i++) {
-		std::cout << "Plant ID # " << dataFrame[i].id << "\n";
-		std::cout << "\tSepal Length: " << dataFrame[i].sepalLength << '\n';
-		std::cout << "\tSepal Width: " << dataFrame[i].sepalWidth << '\n';
-		std::cout << "\tPetal Length: " << dataFrame[i].petalLength << '\n';
-		std::cout << "\tPetal Width: " << dataFrame[i].petalWidth << '\n';
-		std::cout << "\tSpecies: " << dataFrame[i].species << '\n';
+	float m = 0;
+	float b = 0;
+	double learning_rate{ 0.0001 };
+	int epochs = 1000;
+
+	std::tuple<float, float> vals{};
+
+	for (int i = 0; i < epochs; i++) {
+		
+		vals = gradient_descent(dataFrame, m, b, learning_rate);
+		m = std::get<0>(vals);
+		b = std::get<1>(vals);
+		
+		if (i % 100 == 0) {
+			std::cout << "Epoch: " << i << "\n";
+		}
+
+
 	}
+
+	std::cout << "Final m: " << m << '\n';
+	std::cout << "Final b: " << b;
+	
 
 	return 0;
 
